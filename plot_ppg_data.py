@@ -87,7 +87,7 @@ root.geometry("800x500")
 fig = Figure(figsize=(8, 5), dpi=100)
 ax = fig.add_subplot(111)
 
-WINDOW_SIZE = 250  
+WINDOW_SIZE = 1000  
 x_data = np.arange(WINDOW_SIZE)
 
 y_data1 = np.full(WINDOW_SIZE, np.nan)
@@ -172,7 +172,14 @@ def on_closing():
     global is_running
     print("Shutting down...")
     is_running = False
-    root.destroy()
+    
+    def check_thread():
+        if ble_thread.is_alive():
+            root.after(100, check_thread)
+        else:
+            root.destroy()
+            
+    check_thread()
 
 root.protocol("WM_DELETE_WINDOW", on_closing)
 
