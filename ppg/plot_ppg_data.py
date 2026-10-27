@@ -57,7 +57,7 @@ async def ble_loop():
     async with PolarDevice(device) as polar:
         print("starting PPG stream...\n")
         
-        csv_file_handle = open("ppg_data_log.csv", mode="w", newline="")
+        csv_file_handle = open("csv_files/ppg_data_log.csv", mode="w", newline="")
         csv_writer = csv.writer(csv_file_handle)
         csv_writer.writerow(["Time", "Led 1", "Led 2", "Led 3", "Ambient Light"])
 

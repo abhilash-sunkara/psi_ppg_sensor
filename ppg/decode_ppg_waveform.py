@@ -37,7 +37,7 @@ async def main():
     async with PolarDevice(device) as polar:
         print("starting ppg stream\n")
         
-        with open("ppg_data_log.csv", mode="w", newline="") as csv_file:
+        with open("csv_files/ppg_data_log.csv", mode="w", newline="") as csv_file:
             csv_writer = csv.writer(csv_file)
             csv_writer.writerow(["Time", "Led 1", "Led 2", "Led 3", "Ambient Light"])
             

@@ -47,7 +47,7 @@ async def main():
         print(f"battery: {battery_percentage}%")
 
         # opens csv file and sets up the header
-        with open("hr_data_log.csv", mode="w", newline="") as csv_file:
+        with open("csv_files/hr_data_log.csv", mode="w", newline="") as csv_file:
             csv_writer = csv.writer(csv_file)
             csv_writer.writerow(["Time(s)", "BPM"])
 
