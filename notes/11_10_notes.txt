@@ -1,0 +1,2 @@
+Measure ratio of energy of rr to energy of hr -> need to find/tune band and tolerance for this
+Get hr data from sensor, use for calculation 

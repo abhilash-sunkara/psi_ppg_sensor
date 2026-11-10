@@ -50,7 +50,7 @@ async def ble_loop():
     async with PolarDevice(device) as polar:
         print("starting PPG stream...\n")
         
-        csv_file_handle = open("csv_files/ppg_data_log.csv", mode="w", newline="")
+        csv_file_handle = open("ppg_data_log.csv", mode="w", newline="")
         csv_writer = csv.writer(csv_file_handle)
         csv_writer.writerow(["Time", "Led 1", "Led 2", "Led 3", "Ambient Light"])
 
@@ -82,8 +82,8 @@ ax_time = fig.add_subplot(211)
 ax_fft = fig.add_subplot(212)
 
 
-WINDOW_SIZE = 1024  
-FFT_WINDOW = 1024   
+WINDOW_SIZE = 3072  
+FFT_WINDOW = 3072   
 N_FFT = 4096        # 55 / 4096 = 0.0134 Hz bin resolution
 
 x_data = np.arange(WINDOW_SIZE)
@@ -118,8 +118,8 @@ line4, = ax_time.plot(x_data, y_data4, animated=True, color='orange', label='Amb
 ax_time.legend(loc="upper right")
 
 # Configure FFT Spectrum
-ax_fft.set_title("One-Sided FFT Spectrum (0.1–0.3 Hz Modulation & 0.7–3.5 Hz HR)")
-ax_fft.set_xlim(0, 4.5)  
+ax_fft.set_title("One-Sided FFT Spectrum (0.1–0.3 Hz Modulation & 0.7–4.5 Hz HR)")
+ax_fft.set_xlim(0, 3)  
 ax_fft.set_ylim(0, 50000)
 ax_fft.set_xlabel("Freq (Hz)")
 ax_fft.set_ylabel("FFT Amplitude |X(freq)|")

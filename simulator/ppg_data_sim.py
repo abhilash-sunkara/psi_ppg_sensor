@@ -10,4 +10,4 @@ ppg = nk.ppg_simulate(duration=duration, sampling_rate=sampling_rate, heart_rate
 time = np.linspace(0, duration, len(ppg), endpoint=False)
 data = pd.DataFrame({"Time_s": time, "PPG": ppg})
 
-data.to_csv("csv_files/simulated_ppg.csv", index=False)
+data.to_csv("simulated_ppg.csv", index=False)
