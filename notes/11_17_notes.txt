@@ -1,0 +1,5 @@
+find out what extra peaks are 
+get hr data from polar sensor stream
+find proper band for rr band
+
+maybe make UI better?

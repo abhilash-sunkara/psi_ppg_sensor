@@ -24,6 +24,8 @@ csv_writer = None
 csv_file_handle = None
 sample_count = 0  
 
+
+
 def ppg_handler(data):
     global sample_count
 
@@ -98,6 +100,10 @@ T = N_FFT / SAMPLE_RATE
 freq = n / T
 n_oneside = N_FFT // 2
 f_oneside = freq[:n_oneside]
+
+# mask for getting rr and hr
+rr_mask = (f_oneside >= 0.09) & (f_oneside <= 0.11)
+hr_mask = (f_oneside >= 0.7) & (f_oneside <= 3.5)
 
 # Pre-calculate Hanning window for the 1024-sample data slice
 # reduces spectral leakage
@@ -216,6 +222,14 @@ def update_graph():
             X1 = np.abs(fft(sig1, n=N_FFT)[:n_oneside])
             X2 = np.abs(fft(sig2, n=N_FFT)[:n_oneside])
             X3 = np.abs(fft(sig3, n=N_FFT)[:n_oneside])
+
+            # filters and squares to get magnitude
+            rr_energy_1 = np.sum(X1[rr_mask] ** 2)
+            hr_energy_1 = np.sum(X1[hr_mask] ** 2)
+
+            rr_to_hr_ratio_1 = rr_energy_1 / hr_energy_1 if hr_energy_1 > 0 else 0.0
+
+            status_text.set_text(f"RR/HR Energy Ratio (LED1): {rr_to_hr_ratio_1:.4f}")
 
             fft_line1.set_ydata(X1)
             fft_line2.set_ydata(X2)
